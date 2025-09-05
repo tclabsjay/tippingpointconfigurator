@@ -77,7 +77,21 @@ sudo ufw status
 sudo apt install -y certbot python3-certbot-nginx
 ```
 
-## 🚀 Deployment Guide
+## ⚡ Quick Start (One-Line Deployment)
+
+For Ubuntu Server 22.04+, you can deploy the entire application with a single command:
+
+```bash
+curl -sSL https://raw.githubusercontent.com/tclabsjay/tippingpointconfigurator/main/deployment/scripts/deploy.sh | bash
+```
+
+This will automatically:
+- Install all dependencies (Node.js, PM2, Nginx)
+- Configure security (UFW firewall, SSL certificates)
+- Deploy and start the application
+- Set up monitoring and logging
+
+## 🚀 Manual Deployment Guide
 
 ### 1. Clone Repository
 ```bash
@@ -166,7 +180,7 @@ sudo certbot --nginx -d your-domain.com
 
 - **Contact**: Jay Kammerer (jay_kammerer@trendmicro.com)
 - **Subject**: TippingPoint Configurator Question
-- **Version**: 1.0
+- **Version**: 1.1
 
 ## 📄 License
 
