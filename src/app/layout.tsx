@@ -48,7 +48,7 @@ export default function RootLayout({
         {children}
         <footer className="mt-8 border-t border-black/10 dark:border-white/10 text-xs text-neutral-500 dark:text-neutral-400">
           <div className="mx-auto max-w-6xl px-4 py-3 flex flex-col sm:flex-row gap-2 sm:items-center sm:justify-between">
-            <div>Version 1.0</div>
+            <div>Version 1.1</div>
             <div>
               Contact <a className="underline hover:opacity-80" href="mailto:jay_kammerer@trendmicro.com?subject=TippingPoint%20Configurator%20Question">Jay Kammerer</a> for info
             </div>
