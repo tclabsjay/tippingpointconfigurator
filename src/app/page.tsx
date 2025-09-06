@@ -22,7 +22,7 @@ export default function Home() {
               TippingPoint Configurator
             </h1>
             <p className="text-lg text-foreground/70 max-w-2xl">
-              Professional configuration tool for TippingPoint TXE series hardware, 
+              Configuration tool for TippingPoint TXE series hardware, 
               modules, and licenses with advanced quote generation capabilities.
             </p>
           </div>
