@@ -429,6 +429,6 @@ fail2ban-client status
 
 ---
 
-**Document Version**: 1.0  
+**Document Version**: 1.1  
 **Last Updated**: $(date)  
 **Next Review**: 3 months from deployment

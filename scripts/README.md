@@ -76,7 +76,7 @@ Professional, visually appealing scripts for managing the TippingPoint Configura
 ╔══════════════════════════════════════════════════════════════════╗
 ║                    TIPPINGPOINT CONFIGURATOR                     ║
 ║                        Application Starter                       ║
-║                           Version 1.0                            ║
+║                           Version 1.1                            ║
 ╚══════════════════════════════════════════════════════════════════╝
 ```
 
@@ -210,7 +210,7 @@ curl http://localhost:3000/api/health
 
 ---
 
-**Version**: 1.0  
+**Version**: 1.1  
 **Compatibility**: macOS, Linux (Ubuntu 22.04+)  
 **Dependencies**: bash, curl, jq (optional), lsof  
 **Author**: TippingPoint Configurator Team

@@ -1,7 +1,7 @@
 #!/bin/bash
 # TippingPoint Configurator - Deployment Script for Ubuntu Server 22.04+
 # Author: Infrastructure Team
-# Version: 1.0
+# Version: 1.1
 
 set -euo pipefail
 

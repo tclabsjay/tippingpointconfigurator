@@ -26,7 +26,7 @@ SKULL="💀"
 
 # Application configuration
 APP_NAME="TippingPoint Configurator"
-APP_VERSION="1.0"
+APP_VERSION="1.1"
 PORT=3000
 PID_FILE="/tmp/tippingpoint-configurator.pid"
 LOG_FILE="/tmp/tippingpoint-app.log"
