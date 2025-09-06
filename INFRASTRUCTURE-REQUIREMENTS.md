@@ -430,5 +430,5 @@ fail2ban-client status
 ---
 
 **Document Version**: 1.1  
-**Last Updated**: December 17, 2024  
-**Next Review**: March 17, 2025
+**Last Updated**: September 5, 2025  
+**Next Review**: December 5, 2025
