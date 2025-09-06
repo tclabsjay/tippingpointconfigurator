@@ -430,5 +430,5 @@ fail2ban-client status
 ---
 
 **Document Version**: 1.1  
-**Last Updated**: $(date)  
-**Next Review**: 3 months from deployment
+**Last Updated**: December 17, 2024  
+**Next Review**: March 17, 2025
