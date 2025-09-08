@@ -30,7 +30,7 @@ CHART="📊"
 
 # Application configuration
 APP_NAME="TippingPoint Configurator"
-APP_VERSION="1.1"
+APP_VERSION="1.2"
 PORT=3000
 HEALTH_ENDPOINT="http://localhost:$PORT/api/health"
 APP_URL="http://localhost:$PORT/tpc"

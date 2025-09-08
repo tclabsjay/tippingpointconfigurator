@@ -180,7 +180,7 @@ sudo certbot --nginx -d your-domain.com
 
 - **Contact**: Jay Kammerer (jay_kammerer@trendmicro.com)
 - **Subject**: TippingPoint Configurator Question
-- **Version**: 1.1
+- **Version**: 1.2
 
 ## 📄 License
 
