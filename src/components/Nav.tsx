@@ -10,11 +10,13 @@ export default function Nav() {
     <nav className="w-full border-b border-black/10 dark:border-white/10">
       <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <img
-            src="/tmlogo.png"
-            alt="Trend Micro"
-            className="h-7 md:h-8 w-auto"
-          />
+          <Link href="/" className="hover:opacity-80 transition-opacity">
+            <img
+              src="/tmlogo.png"
+              alt="Trend Micro"
+              className="h-7 md:h-8 w-auto cursor-pointer"
+            />
+          </Link>
           <div className="text-lg font-semibold">TippingPoint Configurator</div>
         </div>
         <div className="flex gap-4 text-sm">
