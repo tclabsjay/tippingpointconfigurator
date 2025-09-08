@@ -16,6 +16,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "TippingPoint Configurator",
   description: "Trend Micro TippingPoint configuration tool",
+  icons: {
+    icon: "/tmlogo.png",
+    shortcut: "/tmlogo.png",
+    apple: "/tmlogo.png",
+  },
 };
 
 export default function RootLayout({
