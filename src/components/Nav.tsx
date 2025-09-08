@@ -11,7 +11,7 @@ export default function Nav() {
       <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <img
-            src="/trendmicro.svg"
+            src="/tmlogo.png"
             alt="Trend Micro"
             className="h-7 md:h-8 w-auto"
           />
