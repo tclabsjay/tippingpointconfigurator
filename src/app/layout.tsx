@@ -17,9 +17,15 @@ export const metadata: Metadata = {
   title: "TippingPoint Configurator",
   description: "Trend Micro TippingPoint configuration tool",
   icons: {
-    icon: "/tmlogo.png",
+    icon: [
+      { url: "/tmlogo.png", sizes: "16x16", type: "image/png" },
+      { url: "/tmlogo.png", sizes: "32x32", type: "image/png" },
+      { url: "/tmlogo.png", sizes: "48x48", type: "image/png" },
+    ],
     shortcut: "/tmlogo.png",
-    apple: "/tmlogo.png",
+    apple: [
+      { url: "/tmlogo.png", sizes: "180x180", type: "image/png" },
+    ],
   },
 };
 
@@ -53,7 +59,7 @@ export default function RootLayout({
         {children}
         <footer className="mt-8 border-t border-black/10 dark:border-white/10 text-xs text-neutral-500 dark:text-neutral-400">
           <div className="mx-auto max-w-6xl px-4 py-3 flex flex-col sm:flex-row gap-2 sm:items-center sm:justify-between">
-            <div>Version 1.2</div>
+            <div>Version 1.2.1</div>
             <div>
               Contact <a className="underline hover:opacity-80" href="mailto:jay_kammerer@trendmicro.com?subject=TippingPoint%20Configurator%20Question">Jay Kammerer</a> for info
             </div>
