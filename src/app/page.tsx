@@ -8,10 +8,10 @@ export default function Home() {
         {/* Trend Micro Logo */}
         <div className="flex flex-col items-center gap-6">
           <Image
-            src="/trendmicro-theme.svg"
+            src="/tm-logo-shield.png"
             alt="Trend Micro"
-            width={280}
-            height={168}
+            width={200}
+            height={200}
             priority
             className="opacity-90 hover:opacity-100 transition-opacity duration-300"
           />
