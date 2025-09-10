@@ -52,19 +52,20 @@ export default function TxeConfiguratorPage() {
   }, []);
 
   // Copy quote data to clipboard with headers and nice table formatting
-  const copyQuoteToClipboard = async (lines: { part: string; description: string; qty: number }[]) => {
+  const copyQuoteToClipboard = async (lines: { part: string; description: string; qty: number; configId?: number }[]) => {
     try {
       // Calculate column widths for nice alignment
       const skuWidth = Math.max(3, ...lines.map(l => l.part.length)); // Min 3 for "SKU"
       const descWidth = Math.max(11, ...lines.map(l => l.description.length)); // Min 11 for "Description"
       const qtyWidth = Math.max(8, ...lines.map(l => l.qty.toString().length)); // Min 8 for "Quantity"
+      const configWidth = Math.max(9, ...lines.map(l => (l.configId?.toString() || "—").length)); // Min 9 for "Config ID"
       
       // Create formatted table with headers
-      const header = `${"SKU".padEnd(skuWidth)} | ${"Description".padEnd(descWidth)} | ${"Quantity".padStart(qtyWidth)}`;
-      const separator = `${"-".repeat(skuWidth)}-+-${"-".repeat(descWidth)}-+-${"-".repeat(qtyWidth)}`;
+      const header = `${"SKU".padEnd(skuWidth)} | ${"Description".padEnd(descWidth)} | ${"Quantity".padStart(qtyWidth)} | ${"Config ID".padStart(configWidth)}`;
+      const separator = `${"-".repeat(skuWidth)}-+-${"-".repeat(descWidth)}-+-${"-".repeat(qtyWidth)}-+-${"-".repeat(configWidth)}`;
       
       const rows = lines.map(line => 
-        `${line.part.padEnd(skuWidth)} | ${line.description.padEnd(descWidth)} | ${line.qty.toString().padStart(qtyWidth)}`
+        `${line.part.padEnd(skuWidth)} | ${line.description.padEnd(descWidth)} | ${line.qty.toString().padStart(qtyWidth)} | ${(line.configId?.toString() || "—").padStart(configWidth)}`
       );
       
       const tableContent = [header, separator, ...rows].join("\n");
@@ -82,12 +83,13 @@ export default function TxeConfiguratorPage() {
       const skuWidth = Math.max(3, ...lines.map(l => l.part.length));
       const descWidth = Math.max(11, ...lines.map(l => l.description.length));
       const qtyWidth = Math.max(8, ...lines.map(l => l.qty.toString().length));
+      const configWidth = Math.max(9, ...lines.map(l => (l.configId?.toString() || "—").length));
       
-      const header = `${"SKU".padEnd(skuWidth)} | ${"Description".padEnd(descWidth)} | ${"Quantity".padStart(qtyWidth)}`;
-      const separator = `${"-".repeat(skuWidth)}-+-${"-".repeat(descWidth)}-+-${"-".repeat(qtyWidth)}`;
+      const header = `${"SKU".padEnd(skuWidth)} | ${"Description".padEnd(descWidth)} | ${"Quantity".padStart(qtyWidth)} | ${"Config ID".padStart(configWidth)}`;
+      const separator = `${"-".repeat(skuWidth)}-+-${"-".repeat(descWidth)}-+-${"-".repeat(qtyWidth)}-+-${"-".repeat(configWidth)}`;
       
       const rows = lines.map(line => 
-        `${line.part.padEnd(skuWidth)} | ${line.description.padEnd(descWidth)} | ${line.qty.toString().padStart(qtyWidth)}`
+        `${line.part.padEnd(skuWidth)} | ${line.description.padEnd(descWidth)} | ${line.qty.toString().padStart(qtyWidth)} | ${(line.configId?.toString() || "—").padStart(configWidth)}`
       );
       
       const tableContent = [header, separator, ...rows].join("\n");
@@ -155,8 +157,8 @@ export default function TxeConfiguratorPage() {
   }, [current, smsModels]);
 
   // Compute lines for each config
-  type Line = { part: string; description: string; qty: number };
-  function linesForConfig(cfg: Config): Line[] {
+  type Line = { part: string; description: string; qty: number; configId?: number };
+  function linesForConfig(cfg: Config, configIndex: number): Line[] {
     const lines: Line[] = [];
     const model = models.find((m) => m.id === cfg.modelId);
     if (model) {
@@ -167,46 +169,41 @@ export default function TxeConfiguratorPage() {
         : model.id === "txe-9200"
         ? "TippingPoint 9200TXE HW + Support 1Yr"
         : `${model.name} + HW Support 1Yr`;
-      lines.push({ part: model.sku ?? model.id, description: desc, qty: 1 });
+      lines.push({ part: model.sku ?? model.id, description: desc, qty: 1, configId: configIndex + 1 });
     }
     // licenses
     if (cfg.licenses.inspect) {
       const i = licenses.find((o) => o.sku === cfg.licenses.inspect);
-      if (i) lines.push({ part: i.sku, description: i.name, qty: 1 });
+      if (i) lines.push({ part: i.sku, description: i.name, qty: 1, configId: configIndex + 1 });
     }
     if (cfg.licenses.dv) {
       const d = licenses.find((o) => o.sku === cfg.licenses.dv);
-      if (d) lines.push({ part: d.sku, description: d.name, qty: 1 });
+      if (d) lines.push({ part: d.sku, description: d.name, qty: 1, configId: configIndex + 1 });
     }
     // slots
     cfg.slots.forEach((s) => {
       if (!s.moduleSku) return;
       const m = modules.find((x) => x.sku === s.moduleSku);
-      if (m) lines.push({ part: m.sku, description: m.name, qty: 1 });
+      if (m) lines.push({ part: m.sku, description: m.name, qty: 1, configId: configIndex + 1 });
     });
     return lines;
   }
 
   const aggregated = useMemo(() => {
-    const map = new Map<string, { part: string; description: string; qty: number }>();
-    configs.forEach((cfg) => {
-      linesForConfig(cfg).forEach((l) => {
-        const prev = map.get(l.part);
-        if (!prev) map.set(l.part, { part: l.part, description: l.description, qty: l.qty });
-        else map.set(l.part, { ...prev, qty: prev.qty + l.qty });
+    const lines: Line[] = [];
+    configs.forEach((cfg, configIndex) => {
+      linesForConfig(cfg, configIndex).forEach((l) => {
+        lines.push(l);
       });
       if ((cfg as any).smsSku) {
         const sms = smsModels.find((s) => s.sku === (cfg as any).smsSku);
         if (sms) {
-          const part = sms.sku;
-          const prev = map.get(part);
-          const desc = sms.name;
-          if (!prev) map.set(part, { part, description: desc, qty: 1 });
-          else map.set(part, { ...prev, qty: prev.qty + 1 });
+          // SMS doesn't get a Config ID as per requirements
+          lines.push({ part: sms.sku, description: sms.name, qty: 1 });
         }
       }
     });
-    return Array.from(map.values());
+    return lines;
   }, [configs, models, modules, licenses, smsModels]);
 
   return (
@@ -601,7 +598,7 @@ function fmtUSD(n: number) {
   return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 2 }).format(n);
 }
 
-function QuoteTable({ lines }: { lines: { part: string; description: string; qty: number }[] }) {
+function QuoteTable({ lines }: { lines: { part: string; description: string; qty: number; configId?: number }[] }) {
   return (
     <div>
       <table className="w-full text-sm border-collapse">
@@ -610,6 +607,7 @@ function QuoteTable({ lines }: { lines: { part: string; description: string; qty
             <th className="py-2">SKU</th>
             <th className="py-2">Description</th>
             <th className="py-2 text-right">Quantity</th>
+            <th className="py-2 text-right">Config ID</th>
           </tr>
         </thead>
         <tbody>
@@ -618,6 +616,7 @@ function QuoteTable({ lines }: { lines: { part: string; description: string; qty
               <td className="py-2 pr-2 whitespace-nowrap">{l.part}</td>
               <td className="py-2 pr-2">{l.description}</td>
               <td className="py-2 pr-2 text-right whitespace-nowrap">{l.qty}</td>
+              <td className="py-2 pr-2 text-right whitespace-nowrap">{l.configId || "—"}</td>
             </tr>
           ))}
         </tbody>
