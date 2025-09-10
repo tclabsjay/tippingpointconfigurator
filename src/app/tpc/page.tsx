@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import type { IoModule, TxeModel } from "@/lib/txe";
+import * as XLSX from 'xlsx';
 
 type SlotSelection = { slot: 1 | 2; moduleSku: string | null };
 type LicenseSelection = { inspect: string | ""; dv: string | "" };
@@ -102,6 +103,53 @@ export default function TxeConfiguratorPage() {
       // Show success notification
       setShowCopyNotification(true);
       setTimeout(() => setShowCopyNotification(false), 2000);
+    }
+  };
+
+  // Export quote data to Excel file
+  const exportToExcel = (lines: { part: string; description: string; qty: number; configId?: number }[]) => {
+    try {
+      // Prepare data for Excel
+      const worksheetData = [
+        // Header row
+        ['SKU', 'Description', 'Quantity', 'Config ID'],
+        // Data rows
+        ...lines.map(line => [
+          line.part,
+          line.description,
+          line.qty,
+          line.configId?.toString() || "—"
+        ])
+      ];
+
+      // Create workbook and worksheet
+      const workbook = XLSX.utils.book_new();
+      const worksheet = XLSX.utils.aoa_to_sheet(worksheetData);
+
+      // Set column widths for better formatting
+      const colWidths = [
+        { wch: Math.max(12, ...lines.map(l => l.part.length)) }, // SKU column
+        { wch: Math.max(20, ...lines.map(l => l.description.length)) }, // Description column
+        { wch: 10 }, // Quantity column
+        { wch: 10 }  // Config ID column
+      ];
+      worksheet['!cols'] = colWidths;
+
+      // Add worksheet to workbook
+      XLSX.utils.book_append_sheet(workbook, worksheet, 'Quote for Dynamics');
+
+      // Generate filename with current date
+      const today = new Date();
+      const dateString = today.toISOString().split('T')[0]; // YYYY-MM-DD format
+      const filename = `TippingPoint_Quote_${dateString}.xlsx`;
+
+      // Export file
+      XLSX.writeFile(workbook, filename);
+
+      console.log(`Quote data exported to Excel file: ${filename}`);
+    } catch (err) {
+      console.error("Failed to export to Excel:", err);
+      alert("Failed to export to Excel. Please try again.");
     }
   };
 
@@ -549,7 +597,8 @@ export default function TxeConfiguratorPage() {
       <section className="border rounded p-4 border-black/10 dark:border-white/10">
         <div className="flex items-center justify-between mb-3">
           <h2 className="text-lg font-medium">Quote for Dynamics</h2>
-          <div className="relative">
+          <div className="flex items-center gap-2 relative">
+            {/* Copy Button */}
             <button
               onClick={() => copyQuoteToClipboard(aggregated)}
               className="flex items-center gap-2 px-3 py-1.5 text-sm bg-white dark:bg-gray-800 border border-black/20 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 text-black dark:text-white rounded-lg transition-colors"
@@ -559,6 +608,18 @@ export default function TxeConfiguratorPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
               </svg>
               Copy
+            </button>
+
+            {/* Export to Excel Button */}
+            <button
+              onClick={() => exportToExcel(aggregated)}
+              className="flex items-center gap-2 px-3 py-1.5 text-sm bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors"
+              title="Export quote data to Excel file"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3M3 17V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+              </svg>
+              Export to Excel
             </button>
             
             {/* Copy notification */}
