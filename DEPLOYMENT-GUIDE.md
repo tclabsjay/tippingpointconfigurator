@@ -315,6 +315,6 @@ pm2 restart ecosystem.config.js
 
 ---
 
-**Version**: 1.2  
+**Version**: 1.3.0  
 **Last Updated**: December 2024  
 **Next Review**: March 2025

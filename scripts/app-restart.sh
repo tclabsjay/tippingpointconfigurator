@@ -28,7 +28,7 @@ STAR="⭐"
 
 # Application configuration
 APP_NAME="TippingPoint Configurator"
-APP_VERSION="1.2"
+APP_VERSION="1.3.0"
 PORT=3000
 HEALTH_ENDPOINT="http://localhost:$PORT/api/health"
 APP_URL="http://localhost:$PORT/tpc"

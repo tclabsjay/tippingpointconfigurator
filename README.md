@@ -4,13 +4,24 @@ A professional web application for configuring TippingPoint TXE series hardware,
 
 ## 🚀 Features
 
+### 🎯 **Core Configuration**
 - **Multi-Configuration Management**: Create, clone, and manage multiple hardware configurations
 - **TXE Model Selection**: Support for 5600 TXE, 8600 TXE, and 9200 TXE models with bandwidth tiers
 - **Smart License Matching**: Automatic bandwidth matching between TPS Inspection and ThreatDV licenses
 - **IO Module Configuration**: Comprehensive slot management with bypass modules
 - **SMS Integration**: Optional TippingPoint SMS management selection
-- **Professional Quote Generation**: Copy-formatted quotes with table formatting for Dynamics
+
+### 📊 **Professional Quote Generation** *(New in v1.3.0)*
+- **Excel Export**: One-click export to professionally formatted Excel files
+- **Config ID System**: Sequential configuration tracking (1, 2, 3...) for multi-config quotes
+- **Automatic File Naming**: Date-stamped Excel files (`TippingPoint_Quote_YYYY-MM-DD.xlsx`)
+- **Industry-Standard BOM Format**: Professional Bill of Materials layout
+- **Copy to Clipboard**: Export quote data as formatted text tables
+- **Optimized Excel Formatting**: Auto-sized columns and professional worksheet layout
+
+### 🔧 **Administration**
 - **Admin Backend**: Development administration for catalog management
+- **File-Based Storage**: JSON-based catalog with automatic backups
 
 ## 🏗️ Architecture
 
@@ -180,7 +191,7 @@ sudo certbot --nginx -d your-domain.com
 
 - **Contact**: Jay Kammerer (jay_kammerer@trendmicro.com)
 - **Subject**: TippingPoint Configurator Question
-- **Version**: 1.2
+- **Version**: 1.3.0
 
 ## 📄 License
 
