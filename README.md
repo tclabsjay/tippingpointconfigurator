@@ -1,6 +1,6 @@
 # TippingPoint Configurator
 
-A professional web application for configuring TippingPoint TXE series hardware, modules, and licenses with advanced quote generation capabilities.
+A web application to help the field of Sales Engineers, to configure TippingPoint TXE series hardware, modules, and licenses for quick quote generation capabilities.
 
 ## 🚀 Features
 
