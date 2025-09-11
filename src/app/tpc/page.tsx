@@ -622,7 +622,7 @@ export default function TxeConfiguratorPage() {
             {/* Export to Excel Button */}
             <button
               onClick={() => exportToExcel(aggregated)}
-              className="flex items-center gap-2 px-3 py-1.5 text-sm bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors"
+              className="flex items-center gap-2 px-3 py-1.5 text-sm bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors"
               title="Export quote data to Excel file"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
