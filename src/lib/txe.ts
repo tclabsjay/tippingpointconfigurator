@@ -122,8 +122,8 @@ export const TXE_DATA: TxeData = {
     { sku: "TPNN0372", name: "TippingPoint TXE IO Module 2-Segment 100GbE SR4 Bypass", ports: "4 x multi-mode fiber (MPO)", portSpeed: "100 Gbps", category: "Network IO Module", price: 0 },
     { sku: "TPNN0373", name: "TippingPoint TXE IO Module 2-Segment 100GbE LR4 Bypass", ports: "4 x single-mode fiber (LC)", portSpeed: "100 Gbps", category: "Network IO Module", price: 0 },
     // Non-bypass models at top of the table
-    { sku: "TPNN0370", name: "6-segment 25 GbE SFP28", ports: "12 x SFP28/SFP+/SFP", portSpeed: "1/10/25 Gbps", category: "Network IO Module", price: 0 },
-    { sku: "TPNN0371", name: "4-segment 100 GbE QSFP28", ports: "8 x QSFP28/QSFP+", portSpeed: "40/100 Gbps", category: "Network IO Module", price: 0 },
+    { sku: "TPNN0370", name: "TippingPoint TXE IO Module 6-Segment 1/10/25GbE SFP28", ports: "12 x SFP28/SFP+/SFP", portSpeed: "1/10/25 Gbps", category: "Network IO Module", price: 0 },
+    { sku: "TPNN0371", name: "TippingPoint TXE IO Module 4-Segment 40/100GbE QSFP28", ports: "8 x QSFP28/QSFP+", portSpeed: "40/100 Gbps", category: "Network IO Module", price: 0 },
   ],
   licenses: [
     // Generic groups

@@ -407,6 +407,15 @@ export default function TxeConfiguratorPage() {
                             <option key={m.sku} value={m.sku}>{m.name} [{m.sku}]</option>
                           ))}
                         </optgroup>
+                        <optgroup label="Non-Bypass">
+                          {(() => {
+                            // Non-Bypass modules available for all models
+                            const nonBypassSkus = ["TPNN0370","TPNN0371"];
+                            return modules.filter((m) => nonBypassSkus.includes(m.sku));
+                          })().map((m) => (
+                            <option key={m.sku} value={m.sku}>{m.name} [{m.sku}]</option>
+                          ))}
+                        </optgroup>
                       </select>
                     </label>
                   ))}
