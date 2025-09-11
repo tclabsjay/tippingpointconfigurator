@@ -328,7 +328,7 @@ export default function TxeConfiguratorPage() {
                       checked={Boolean((current as any).smsSku)}
                       onChange={(e) => updateCurrent((c) => ({ ...c, ...(e.target.checked ? { smsSku: smsModels[0]?.sku ?? "" } : { smsSku: "" }) }))}
                     />
-                    <span>Customer has a TippingPoint SMS?</span>
+                    <span>Does the customer need an SMS? (If so this is not required)</span>
                   </label>
                   {Boolean((current as any).smsSku) ? (
                     <select
@@ -343,7 +343,7 @@ export default function TxeConfiguratorPage() {
                   ) : null}
                 </div>
                 <div className="mt-3 text-sm italic text-gray-600 dark:text-gray-400">
-                  Always ensure the customer has a SMS, and please ensure you connect it to{" "}
+                  SMS is required to connect to Vision One{" "}
                   <a 
                     href="https://docs.trendmicro.com/en-us/documentation/article/trend-vision-one-tippingpoint-sms-connection-guides"
                     target="_blank"
