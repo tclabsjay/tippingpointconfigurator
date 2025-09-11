@@ -624,7 +624,7 @@ export default function TxeConfiguratorPage() {
             
             {/* Copy notification */}
             {showCopyNotification && (
-              <div className="absolute -top-10 right-0 bg-green-600 text-white px-3 py-1 rounded-md text-sm font-medium shadow-lg animate-fade-in">
+              <div className="absolute -top-10 right-0 bg-red-600 text-white px-3 py-1 rounded-md text-sm font-medium shadow-lg animate-fade-in">
                 Copied!
               </div>
             )}
