@@ -18,6 +18,8 @@ A professional web application for configuring TippingPoint TXE series hardware,
 - **Industry-Standard BOM Format**: Professional Bill of Materials layout
 - **Copy to Clipboard**: Export quote data as formatted text tables
 - **Optimized Excel Formatting**: Auto-sized columns and professional worksheet layout
+- **Unified Red Theme**: Consistent color scheme matching TippingPoint branding *(v1.3.1)*
+- **Precise User Feedback**: Notifications positioned above relevant actions *(v1.3.1)*
 
 ### 🔧 **Administration**
 - **Admin Backend**: Development administration for catalog management
@@ -191,7 +193,7 @@ sudo certbot --nginx -d your-domain.com
 
 - **Contact**: Jay Kammerer (jay_kammerer@trendmicro.com)
 - **Subject**: TippingPoint Configurator Question
-- **Version**: 1.3.0
+- **Version**: 1.3.1
 
 ## 📄 License
 
