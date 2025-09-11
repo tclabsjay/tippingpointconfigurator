@@ -597,18 +597,27 @@ export default function TxeConfiguratorPage() {
       <section className="border rounded p-4 border-black/10 dark:border-white/10">
         <div className="flex items-center justify-between mb-3">
           <h2 className="text-lg font-medium">Quote for Dynamics</h2>
-          <div className="flex items-center gap-2 relative">
-            {/* Copy Button */}
-            <button
-              onClick={() => copyQuoteToClipboard(aggregated)}
-              className="flex items-center gap-2 px-3 py-1.5 text-sm bg-white dark:bg-gray-800 border border-black/20 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 text-black dark:text-white rounded-lg transition-colors"
-              title="Copy quote data to clipboard"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-              </svg>
-              Copy
-            </button>
+          <div className="flex items-center gap-2">
+            {/* Copy Button with notification */}
+            <div className="relative">
+              <button
+                onClick={() => copyQuoteToClipboard(aggregated)}
+                className="flex items-center gap-2 px-3 py-1.5 text-sm bg-white dark:bg-gray-800 border border-black/20 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 text-black dark:text-white rounded-lg transition-colors"
+                title="Copy quote data to clipboard"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+                Copy
+              </button>
+              
+              {/* Copy notification */}
+              {showCopyNotification && (
+                <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-red-600 text-white px-3 py-1 rounded-md text-sm font-medium shadow-lg animate-fade-in whitespace-nowrap">
+                  Copied!
+                </div>
+              )}
+            </div>
 
             {/* Export to Excel Button */}
             <button
@@ -621,13 +630,6 @@ export default function TxeConfiguratorPage() {
               </svg>
               Export to Excel
             </button>
-            
-            {/* Copy notification */}
-            {showCopyNotification && (
-              <div className="absolute -top-10 right-0 bg-red-600 text-white px-3 py-1 rounded-md text-sm font-medium shadow-lg animate-fade-in">
-                Copied!
-              </div>
-            )}
           </div>
         </div>
         <QuoteTable lines={aggregated} />
