@@ -6,7 +6,7 @@ export async function GET() {
     const healthData = {
       status: 'healthy',
       timestamp: new Date().toISOString(),
-      version: '1.3.2',
+      version: '1.3.3',
       environment: process.env.NODE_ENV || 'development',
       uptime: process.uptime(),
       memory: {
@@ -34,7 +34,7 @@ export async function GET() {
         status: 'unhealthy', 
         timestamp: new Date().toISOString(),
         error: 'Health check failed',
-        version: '1.3.2'
+        version: '1.3.3'
       }, 
       { 
         status: 503,

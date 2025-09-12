@@ -7,7 +7,8 @@ A web application to help the field of Sales Engineers, to configure TippingPoin
 ### 🎯 **Core Configuration**
 - **Multi-Configuration Management**: Create, clone, and manage multiple hardware configurations
 - **TXE Model Selection**: Support for 5600 TXE, 8600 TXE, and 9200 TXE models with bandwidth tiers
-- **Smart License Matching**: Automatic bandwidth matching between TPS Inspection and ThreatDV licenses
+- **Smart License Matching**: Automatic bandwidth matching between TPS Inspection and ThreatDV licenses *(Enhanced in v1.3.3)*
+- **Automatic License Selection**: Licenses auto-selected based on throughput choice *(New in v1.3.3)*
 - **IO Module Configuration**: Comprehensive slot management with bypass and non-bypass modules
 - **Non-Bypass Modules**: High-speed 1/10/25GbE and 40/100GbE networking options *(New in v1.3.2)*
 - **SMS Integration**: Optional TippingPoint SMS management selection with Vision One guidance *(Enhanced in v1.3.2)*
@@ -194,7 +195,7 @@ sudo certbot --nginx -d your-domain.com
 
 - **Contact**: Jay Kammerer (jay_kammerer@trendmicro.com)
 - **Subject**: TippingPoint Configurator Question
-- **Version**: 1.3.2
+- **Version**: 1.3.3
 
 ## 📄 License
 
