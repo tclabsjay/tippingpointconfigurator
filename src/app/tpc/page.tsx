@@ -297,7 +297,47 @@ export default function TxeConfiguratorPage() {
                     <select
                       className="w-full border rounded px-2 py-1 bg-transparent"
                       value={current.modelId ?? ""}
-                      onChange={(e) => updateCurrent((c) => ({ ...c, modelId: e.target.value || null, throughputGbps: models.find((m) => m.id === e.target.value)?.tiers?.[0]?.gbps ?? null }))}
+                      onChange={(e) => {
+                        const newModelId = e.target.value || null;
+                        const newModel = models.find((m) => m.id === newModelId);
+                        const newThroughput = newModel?.tiers?.[0]?.gbps ?? null;
+                        
+                        // Find matching licenses for the new model and throughput
+                        let matchingInspectLicense = "";
+                        let matchingThreatDVLicense = "";
+                        
+                        if (newModelId && newThroughput && newThroughput > 0) {
+                          // Find the exact matching Inspection license
+                          const inspectLicense = licenses.find((l) => 
+                            l.group === "INSPECT" && 
+                            l.modelId === newModelId && 
+                            l.appliesToGbpsMax === newThroughput
+                          );
+                          if (inspectLicense) {
+                            matchingInspectLicense = inspectLicense.sku;
+                          }
+                          
+                          // Find the exact matching ThreatDV license
+                          const threatDVLicense = licenses.find((l) => 
+                            l.group === "THREATDV" && 
+                            l.modelId === newModelId && 
+                            l.appliesToGbpsMax === newThroughput
+                          );
+                          if (threatDVLicense) {
+                            matchingThreatDVLicense = threatDVLicense.sku;
+                          }
+                        }
+                        
+                        updateCurrent((c) => ({ 
+                          ...c, 
+                          modelId: newModelId, 
+                          throughputGbps: newThroughput,
+                          licenses: {
+                            inspect: matchingInspectLicense,
+                            dv: matchingThreatDVLicense
+                          }
+                        }));
+                      }}
                     >
                       {models.map((m) => (
                         <option key={m.id} value={m.id}>{m.name}</option>
@@ -309,7 +349,45 @@ export default function TxeConfiguratorPage() {
                     <select
                       className="w-full border rounded px-2 py-1 bg-transparent"
                       value={current.throughputGbps ?? ""}
-                      onChange={(e) => updateCurrent((c) => ({ ...c, throughputGbps: Number(e.target.value) }))}
+                      onChange={(e) => {
+                        const newThroughput = Number(e.target.value);
+                        const mdl = currentModel?.id;
+                        
+                        // Find matching licenses for the new throughput
+                        let matchingInspectLicense = "";
+                        let matchingThreatDVLicense = "";
+                        
+                        if (mdl && newThroughput > 0) {
+                          // Find the exact matching Inspection license
+                          const inspectLicense = licenses.find((l) => 
+                            l.group === "INSPECT" && 
+                            l.modelId === mdl && 
+                            l.appliesToGbpsMax === newThroughput
+                          );
+                          if (inspectLicense) {
+                            matchingInspectLicense = inspectLicense.sku;
+                          }
+                          
+                          // Find the exact matching ThreatDV license
+                          const threatDVLicense = licenses.find((l) => 
+                            l.group === "THREATDV" && 
+                            l.modelId === mdl && 
+                            l.appliesToGbpsMax === newThroughput
+                          );
+                          if (threatDVLicense) {
+                            matchingThreatDVLicense = threatDVLicense.sku;
+                          }
+                        }
+                        
+                        updateCurrent((c) => ({ 
+                          ...c, 
+                          throughputGbps: newThroughput,
+                          licenses: {
+                            inspect: matchingInspectLicense,
+                            dv: matchingThreatDVLicense
+                          }
+                        }));
+                      }}
                     >
                       {currentTierOptions.map((t) => (
                         <option key={t.gbps} value={t.gbps}>{t.label}</option>
